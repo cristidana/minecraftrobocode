@@ -138,7 +138,7 @@ GameObject:
   - component: {fileID: 250849748}
   - component: {fileID: 250849749}
   m_Layer: 0
-  m_Name: Capsule
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -469,6 +469,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2083276633}
   - component: {fileID: 2083276634}
+  - component: {fileID: 2083276635}
   m_Layer: 0
   m_Name: LevelGenerator
   m_TagString: Untagged
@@ -498,12 +499,26 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2083276632}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 00d1ab810b530425683bccfdada8ca04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cube: {fileID: 2592937441496273031, guid: 5712e478b58464bd98158c655f9e4f7f, type: 3}
+--- !u!114 &2083276635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2083276632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 469a5df26218c4071b682d6707b316a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grass: {fileID: 5290828244455094335, guid: e13e1e12027b2b344a16183fda9db551, type: 3}
+  ground: {fileID: 5616334996364480650, guid: 4c596abf7de2a6a4a8a47e185cc21115, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
