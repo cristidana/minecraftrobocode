@@ -16,6 +16,10 @@ public class PlayerController : MonoBehaviour
     public CharacterController cc;
     public Camera cam;
 
+    public GameObject arma;
+    public float hitSpeed = 15f;
+    public float hitLastTime = 0f;
+
 
     void Start()
     {
@@ -28,6 +32,25 @@ public class PlayerController : MonoBehaviour
     {
         RotateCharacter();
         MoveCharacter();
+
+
+        RaycastHit hit;
+
+        if(Physics.Raycast
+            (cam.transform.position,
+            cam.transform.forward,
+            out hit,
+            5f
+            ))
+        {
+            if (Input.GetKeyDown(KeyCode.K))
+            {
+                ObjectInteraction(
+                    hit.transform.gameObject);
+            }
+        }
+
+
     }
 
     void RotateCharacter()
@@ -71,4 +94,35 @@ public class PlayerController : MonoBehaviour
         cc.Move(vel * Time.deltaTime);
 
     }
+
+
+    void Mine(Block block)
+    {
+        if(Time.time - hitLastTime > 1 / hitSpeed)
+        {
+            arma.GetComponent<Animator>()
+                .SetTrigger("attack");
+
+            hitLastTime = Time.time;
+
+            block.health -= arma.GetComponent < Tool >()
+                                    .damageToBlock;
+
+            if(block.health <= 0)
+            {
+                block.DestroyBlock();
+            }
+        }
+    }
+
+
+
+    void ObjectInteraction(GameObject obj)
+    {
+        if (obj.tag == "Block") {
+            Mine(obj.GetComponent<Block>());
+        }
+    }
+
+
 }
