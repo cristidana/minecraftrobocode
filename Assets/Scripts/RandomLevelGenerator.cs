@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RandomLevelGenerator : MonoBehaviour
 {
-    public GameObject grass, ground;
+    public GameObject grass, ground, chest;
 
     private int baseHeight = 2,
             maxBlockY = 10,
@@ -58,17 +58,29 @@ public class RandomLevelGenerator : MonoBehaviour
                     temp.transform.SetParent(chunk.transform);
                 }
                 GameObject t = Instantiate(grass, new Vector3(x, h, z), Quaternion.identity);
-
                 t.transform.SetParent(chunk.transform);
+
+                createChest(x, h + 1, z, chunk.transform);
             }
         }
 
 
 
-
-
-
-
     }
+
+    void createChest(int x, int y, int z, Transform parent)
+    {
+        int r = Random.Range(0, 100);
+        if (r > 98)
+        {
+            GameObject c = Instantiate(chest,
+                new Vector3(x, y, z),
+                Quaternion.identity);
+
+            c.transform.SetParent(parent);
+        }
+    }
+
+
 
 }

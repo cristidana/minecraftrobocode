@@ -7,9 +7,9 @@ public class ItemData : MonoBehaviour
 {
     public string _name;
     public int id, count;
+    public bool isUniq;
     [Multiline]
     public string description;
-    public bool isUniq;
 
     public ItemData(string _name,int id,
         int count,string description,bool isUniq)
@@ -17,8 +17,8 @@ public class ItemData : MonoBehaviour
         this._name = _name;
         this.id = id;
         this.count = count;
-        this.description = description;
         this.isUniq = isUniq;
+        this.description = description;
     }
 
 }
