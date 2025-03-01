@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Block
   - Chest
+  - Weapon
   layers:
   - Default
   - TransparentFX

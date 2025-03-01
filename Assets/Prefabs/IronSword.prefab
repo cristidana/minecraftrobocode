@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 8953688269732267814}
   - component: {fileID: 7746316339781637699}
   - component: {fileID: 7746316339781637702}
+  - component: {fileID: 4095429415596186725}
   m_Layer: 0
   m_Name: IronSword
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -118,7 +119,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddcb9b40e04da45f4a41e7feaf85ccaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
-  material: 0
-  damageToEnemy: 0
-  damageToBlock: 0
+  type: 4
+  material: 1
+  damageToEnemy: 90
+  damageToBlock: 10
+--- !u!64 &4095429415596186725
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7440254975354529523}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 3418543572467159651, guid: 747d48883b3696c44a7e28f01213aed2, type: 3}

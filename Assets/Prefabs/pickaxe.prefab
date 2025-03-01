@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -1912435755536757807}
   m_Layer: 0
   m_Name: pickaxe
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -68,7 +68,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
-  material: 4
+  material: 1
   damageToEnemy: 10
   damageToBlock: 90
 --- !u!1 &5688570095567264459
