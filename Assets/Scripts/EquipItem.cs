@@ -24,6 +24,8 @@ public class EquipItem : MonoBehaviour
 
             Animator weaponAnimator = currentWeapon.GetComponent<Animator>();
             weaponAnimator.enabled = true;
+            MeshCollider mesh = currentWeapon.GetComponent<MeshCollider>();
+            mesh.enabled = false;
             pc.arma = currentWeapon;
 
 
