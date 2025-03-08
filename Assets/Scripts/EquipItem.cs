@@ -15,7 +15,15 @@ public class EquipItem : MonoBehaviour
             Vector3 currentWeaponPosition = currentWeapon.transform.position;
             Quaternion currentWeaponRotation = currentWeapon.transform.rotation;
 
-            Destroy(currentWeapon);
+
+            currentWeapon.transform.SetParent(null);
+
+            Rigidbody rb = currentWeapon.GetComponent<Rigidbody>();
+            Animator anim = currentWeapon.GetComponent<Animator>();
+
+            anim.enabled = false;
+            rb.AddForce(transform.up*1f + transform.forward * 2f, ForceMode.Impulse);
+
             Destroy(other.gameObject);
 
             currentWeapon = Instantiate(newWeapon, currentWeaponPosition, currentWeaponRotation);
