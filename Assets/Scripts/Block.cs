@@ -4,28 +4,32 @@ using UnityEngine;
 
 public class Block : MonoBehaviour
 {
-    public int health { get; set; }
+    [SerializeField] private BlockTypes blockTypes;
+    private int health;
 
-    public BlockTypes block;
+    public int Health
+    {
+        get
+        {
+            return health;
+        }
+        set
+        {
+            health = value;
+        }
+    }
+
 
     void Start()
     {
-        health = (int)block;
-
-
+        Health = (int)blockTypes;
     }
 
-    public void DestroyBlock()
+    public void DestroyBehaviour()
     {
-        GameObject mini = Resources.Load<GameObject>(
-                            "mini" + block.ToString());
+        GameObject miniBlock = Resources.Load<GameObject>("mini" + blockTypes.ToString());
 
-        Instantiate(
-            mini,
-            transform.position,
-            Quaternion.identity
-            );
-
+        Instantiate(miniBlock, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 }

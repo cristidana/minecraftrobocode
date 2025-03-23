@@ -1,24 +1,24 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[SerializeField]
-public class ItemData : MonoBehaviour
+[System.Serializable]
+public class ItemData
 {
-    public string _name;
-    public int id, count;
+    public string itemName;
+    public int count, id;
     public bool isUniq;
+
     [Multiline]
     public string description;
 
-    public ItemData(string _name,int id,
-        int count,string description,bool isUniq)
+    public ItemData(string itemName, int count, int id, bool isUniq, string desc)
     {
-        this._name = _name;
-        this.id = id;
+        this.itemName = itemName;
         this.count = count;
+        this.id = id;
         this.isUniq = isUniq;
-        this.description = description;
+        this.description = desc;
     }
-
 }

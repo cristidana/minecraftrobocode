@@ -1,60 +1,64 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class InventoryManager : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject slotPref;
+    [SerializeField] private GameObject slotPref;
+    [SerializeField] public GameObject inventoryPanel, chestPanel, descriptionPanel;
+    [SerializeField] public GameObject inventoryContent, chestContent;
+    [SerializeField] public ItemData[] items; // ????? ???? ????????? ???? ItemData ? ???
 
-    public GameObject inventoryPanel, chestPanel;
-    public GameObject invContent, chestContent;
-
-    public ItemData[] items;
-
-    public List<GameObject> invSlots
-        = new List<GameObject>();
-
-    public List<GameObject> chestSlots
-        = new List<GameObject>();
+    public List<GameObject> inventorySlots = new List<GameObject>(); // ?????? ?????????, ?? ?????? ?????????????
+    public List<GameObject> chestItems = new List<GameObject>();
 
     void Start()
     {
         inventoryPanel.SetActive(false);
         chestPanel.SetActive(false);
-
     }
-    void CreateItem(int id, List<ItemData> itemList)
+
+    public void CreateItem(int itemid, List<ItemData> itemsList)
     {
         ItemData item = new ItemData(
-            items[id].name,
-            items[id].id,
-            items[id].count,
-            items[id].description,
-            items[id].isUniq
-            );
+            items[itemid].itemName, // TODO
+            items[itemid].count,
+            items[itemid].id,
+            items[itemid].isUniq,
+            items[itemid].description);
 
-        if(!item.isUniq && itemList.Count > 0)
+        if (!item.isUniq && itemsList.Count > 0)
         {
-            for (int i = 0; i < itemList.Count; i++) {
-                if (item.id == itemList[i].id)
+            for (int i = 0; i < itemsList.Count; i++)
+            {
+                if (item.id == itemsList[i].id)
                 {
-                    itemList[i].count += 1;
+                    itemsList[i].count++;
                     break;
                 }
-                else if(i == itemList.Count -1)
+                else if (i == itemsList.Count - 1)
                 {
-                    itemList.Add(item);
+                    itemsList.Add(item);
                     break;
                 }
-
-
-             }
+            }
         }
-        else if(item.isUniq || (!item.isUniq && itemList.Count == 0))
+        else if (item.isUniq || (!item.isUniq && itemsList.Count == 0))
         {
-            itemList.Add(item);
+            itemsList.Add(item);
         }
     }
 
+    public void InstatiateItem(ItemData item, Transform parent, List<GameObject> itemsList)
+    {
+        GameObject slot = Instantiate(slotPref);
+        slot.transform.SetParent(parent.transform);
+        slot.AddComponent<Slot>();
+        slot.GetComponent<Slot>().itemData = item;
+        slot.transform.Find("ItemNameText").GetComponent<Text>().text = item.itemName;
+        slot.transform.Find("ItemImg").GetComponent<Image>().sprite = Resources.Load<Sprite>(item.itemName);
+        slot.transform.Find("ItemCountText").GetComponent<Text>().text = item.count.ToString();
+        slot.transform.Find("ItemCountText").GetComponent<Text>().color = item.isUniq ? Color.clear : Color.white;
+        itemsList.Add(slot);
+    }
 }

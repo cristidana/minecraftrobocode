@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class Chest : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public List<ItemData> chestItems = new List<ItemData>();
 
-    // Update is called once per frame
-    void Update()
+    private void Awake()
     {
-        
+        InventoryManager im
+    = GameObject.Find("InventoryManager").GetComponent<InventoryManager>();
+
+        int chestC = Random.Range(3, 8);
+
+        for(int i=0; i< chestC; i++)
+        {
+            im.CreateItem(
+                Random.Range(0, im.items.Length),
+                chestItems
+                );
+        }
     }
 }
