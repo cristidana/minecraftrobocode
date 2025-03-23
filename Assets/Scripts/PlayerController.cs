@@ -208,9 +208,7 @@ public class PlayerController : MonoBehaviour
                 block.Health -= 1;
             }
 
-            GameObject go = Instantiate(particleObj, block.transform.position, Quaternion.identity);
-            go.GetComponent<ParticleSystemRenderer>().material = block.gameObject.GetComponent<MeshRenderer>().material;
-            if (block.Health <= 0)
+              if (block.Health <= 0)
             {
                 block.DestroyBehaviour();
             }
