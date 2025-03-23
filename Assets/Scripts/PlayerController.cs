@@ -49,6 +49,19 @@ public class PlayerController : MonoBehaviour
     }
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.E) &&
+            !inventoryManager.inventoryPanel.activeSelf)
+        {
+            OpenInventory();
+
+        }
+        else if (Input.GetKeyDown(KeyCode.Q))
+        {
+            CloseInventory();
+        }
+
+
+
         if (canMove)
         {
             RotateCharacter();
@@ -84,7 +97,9 @@ public class PlayerController : MonoBehaviour
                 {
                     currentChestItems = tempObj.GetComponent<Chest>().chestItems;
                     OpenChest();
+                    OpenInventory();
                 }
+
                 break;
         }
     }
@@ -199,6 +214,17 @@ public class PlayerController : MonoBehaviour
             currentEquipedItem.GetComponent<Animator>().SetTrigger("attack");
             hitLastTime = Time.time;
             Tool currentToolInfo;
+
+            GameObject go = Instantiate(
+                particleObj,
+                block.transform.position,
+                Quaternion.identity
+                );
+
+            go.GetComponent<ParticleSystemRenderer>().material =
+            block.GetComponent<MeshRenderer>().material;
+
+
             if (currentEquipedItem.TryGetComponent<Tool>(out currentToolInfo))
             {
                 block.Health -= currentToolInfo.damageToBlock;
@@ -248,5 +274,58 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    
+
+    void OnCollisionEnter(Collision col)
+    {
+
+        if (col.gameObject.name.StartsWith("mini"))
+        {
+            inventoryManager.CreateItem(2, invItems);
+            Destroy(col.gameObject);
+        }
+    }
+    public void OpenInventory()
+    {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.Confined;
+        canMove = false;
+
+        inventoryManager.inventoryPanel.SetActive(true);
+        for (int i = 0; i < invItems.Count; i++)
+        {
+            inventoryManager.InstatiateItem(
+                invItems[i],
+                itemParent,
+                inventoryManager.inventorySlots
+                );
+        }
+
+    }
+
+    void CloseInventory()
+    {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        canMove = true;
+
+        foreach( GameObject slot in inventoryManager.inventorySlots)
+        {
+            Destroy(slot);
+        }
+        foreach (GameObject slot in inventoryManager.chestItems)
+        {
+            Destroy(slot);
+        }
+
+        inventoryManager.inventorySlots.Clear();
+        inventoryManager.chestItems.Clear();
+        inventoryManager.inventoryPanel.SetActive(false);
+        inventoryManager.chestPanel.SetActive(false);
+
+
+
+    }
+
+
+
 }
